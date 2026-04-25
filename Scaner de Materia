@@ -1,0 +1,79 @@
+import time
+import random
+
+class MateriaFlowAdvanced:
+    def __init__(self):
+        # 1. Base de Dados Atômica e Exótica
+        self.base_dados = {
+            "79": {"nome": "Ouro", "densidade": 19.3, "condutividade": "Alta", "origem": "Terrestre"},
+            "26": {"nome": "Ferro", "densidade": 7.8, "condutividade": "Alta", "origem": "Terrestre"},
+            "13": {"nome": "Alumínio", "densidade": 2.7, "condutividade": "Alta", "origem": "Terrestre"},
+            "hematita": {"densidade": 5.2, "condutividade": "Média", "origem": "Marte"},
+            "gelo": {"densidade": 0.9, "condutividade": "Nula", "origem": "Subsolo/Marte"},
+            "desconhecido": {"densidade": 0.0, "condutividade": "Infinita", "origem": "Arcturiana"}
+        }
+        
+        # 2. Hardware e Status
+        self.temperatura = 35.0  # Celsius
+        self.energia = 100       # Porcentagem
+        self.memoria_db = "128GB (Carregada)"
+        self.chips_status = "FPGA Operacional"
+
+    def mostrar_interface(self):
+        print("\n" + "="*40)
+        print("      MATERIAFLOW - ESCÂNER AVANÇADO")
+        print("="*40)
+        print(f"Status: {self.chips_status} | Temp: {self.temperatura}°C")
+        print(f"Energia: {self.energia}% | Memória: {self.memoria_db}")
+        print("-"*40)
+
+    def processar_espiral(self, modo):
+        """Simula a varredura em espiral que você desenhou"""
+        print(f"[*] Iniciando varredura em espiral (Modo: {modo})...")
+        time.sleep(1.5)
+        
+        # O uso de alta tecnologia gera calor e gasta bateria
+        if modo == "Longo Alcance":
+            self.temperatura += 15.5
+            self.energia -= 10
+        else:
+            self.temperatura += 5.2
+            self.energia -= 2
+
+    def analisar_amostra(self, densidade, condutividade, raio_x_atomo=None):
+        self.mostrar_interface()
+        
+        # Checagem de segurança (Hardware)
+        if self.temperatura > 85.0:
+            return "!!! ERRO CRÍTICO: Superaquecimento Detectado. Abortando para salvar componentes."
+
+        self.processar_espiral("Análise Química")
+
+        # Lógica de Identificação
+        resultado = None
+        if raio_x_atomo:
+            resultado = self.base_dados.get(str(raio_x_atomo))
+
+        if resultado:
+            return f"[+] IDENTIFICADO: {resultado['nome']} | Origem: {resultado['origem']} | Condutividade: {resultado['condutividade']}"
+        
+        # Protocolo de Anomalias (Matéria Desconhecida)
+        else:
+            id_anomalia = f"UNK-{densidade}-{random.randint(100, 999)}"
+            print(f"[!] PROTOCOLO DE ANOMALIA ATIVADO: {id_anomalia}")
+            
+            if densidade > 22.0:
+                classif = "Matéria Ultra-Densa (Possível Origem Estelar)"
+            elif condutividade.lower() == "infinita":
+                classif = "Supercondutor Exótico"
+            else:
+                classif = "Composto Complexo Não Catalogado"
+                
+            return f"[?] RESULTADO: {classif}\n[i] Assinatura salva para banco de dados Arcturiano."
+
+# --- Exemplo de Execução ---
+escaner = MateriaFlowAdvanced()
+
+# Simulando uma detecção
+print(escaner.analisar_amostra(densidade=19.3, condutividade="Alta", raio_x_atomo=79)) # Ouro
+print(escaner.analisar_amostra(densidade=45.0, condutividade="Infinita"))              # Anomalia

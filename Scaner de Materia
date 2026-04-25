@@ -77,3 +77,19 @@ escaner = MateriaFlowAdvanced()
 # Simulando uma detecção
 print(escaner.analisar_amostra(densidade=19.3, condutividade="Alta", raio_x_atomo=79)) # Ouro
 print(escaner.analisar_amostra(densidade=45.0, condutividade="Infinita"))              # Anomalia
+
+def refinamento_espectroscopia(self, d_lida, c_lida):
+    """
+    Simula a análise de múltiplos sensores para evitar erros.
+    """
+    print("[*] Iniciando Refinamento de Espectroscopia...")
+    time.sleep(0.8)
+    
+    # Exemplo: Ouro e Urânio têm densidades próximas (19.3 e 19.1)
+    if 19.0 <= d_lida <= 19.5:
+        if c_lida == "Alta":
+            return "Confirmado: Ouro (Au). Material Estável."
+        else:
+            return "Alerta: Densidade compatível com Urânio (U). Verificando Radiação..."
+    
+    return "Refinamento concluído. Dados consistentes."
